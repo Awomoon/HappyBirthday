@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>For My Purpelly 💜</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@700&family=Montserrat:wght@400;700;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            overflow-x: hidden;
+            background: #0a0a1a;
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+        }
+        
+        /* Cosmic Background */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://images.unsplash.com/photo-1534796636912-3b95b3ab5986?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80') no-repeat center center;
+            background-size: cover;
+            z-index: -3;
+            animation: cosmicPulse 30s infinite alternate;
+        }
+        
+        @keyframes cosmicPulse {
+            0% { opacity: 0.8; }
+            50% { opacity: 1; }
+            100% { opacity: 0.8; }
+        }
+        
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+        }
+        
+        @keyframes twinkle {
+            0%, 100% { opacity: 0; transform: scale(0.5); }
+            50% { opacity: var(--opacity); transform: scale(1); }
+        }
+        
+        .purple-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(58, 12, 163, 0.7) 0%, rgba(10, 10, 26, 0.9) 70%);
+            z-index: -2;
+            transition: all 1s ease;
+        }
+        
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(186, 85, 211, 0.8);
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: float 8s infinite ease-in-out;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+        
+        /* Header Section */
+        .header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 4rem;
+            color: #e0aaff;
+            margin-bottom: 2rem;
+            text-shadow: 0 0 15px #9d4edd;
+            z-index: 10;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .title::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #0a0a1a;
+            animation: textReveal 3s forwards;
+            transform-origin: left;
+        }
+        
+        @keyframes textReveal {
+            to {
+                transform: translateX(100%);
+            }
+        }
+        
+        .title span {
+            opacity: 0;
+            animation: fadeIn 0.5s forwards;
+            animation-delay: calc(var(--char-index) * 0.1s + 0.5s);
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+            }
+        }
+        
+        .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 3rem;
+            max-width: 800px;
+            z-index: 10;
+            font-weight: 400;
+            line-height: 1.6;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 1s ease-out forwards;
+            animation-delay: 3.5s;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Scroll Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #e0aaff;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            animation-delay: 4s;
+            animation-fill-mode: forwards;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
+            40% { transform: translateY(-20px) translateX(-50%); }
+            60% { transform: translateY(-10px) translateX(-50%); }
+        }
+        
+        /* Gallery Section */
+        .gallery-section {
+            padding: 4rem 2rem;
+            position: relative;
+        }
+        
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3rem;
+            color: #e0aaff;
+            text-align: center;
+            margin-bottom: 3rem;
+            animation: pulse 4s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.05); }
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .gallery-item {
+            position: relative;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 0 30px rgba(157, 78, 221, 0.5);
+            transition: all 0.5s ease;
+            aspect-ratio: 1/1;
+            animation: fadeInUp 1s ease-out;
+            animation-fill-mode: both;
+        }
+        
+        /* Special styling for video item */
+        .gallery-item.video-item {
+            aspect-ratio: 9/16; /* Taller aspect ratio for video */
+            grid-row: span 2; /* Takes up more vertical space */
+        }
+        
+        .gallery-item:nth-child(1) { animation-delay: 0.2s; }
+        .gallery-item:nth-child(2) { 
+            animation-delay: 0.4s;
+        }
+        .gallery-item:nth-child(3) { animation-delay: 0.6s; }
+        
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .gallery-item:hover {
+            transform: translateY(-10px) scale(1.03);
+            box-shadow: 0 0 50px rgba(224, 170, 255, 0.7);
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            background: #000;
+        }
+
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.5s ease;
+            background: #000;
+        }
+        
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.1);
+        }
+        
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(57, 0, 102, 0.8));
+            padding: 1.5rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.5rem;
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+            color: white;
+            text-align: center;
+        }
+        
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+        
+        /* Video controls */
+        .video-controls {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 10px;
+            z-index: 10;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-item:hover .video-controls {
+            opacity: 1;
+        }
+        
+        .video-btn {
+            background: rgba(157, 78, 221, 0.7);
+            border: none;
+            color: white;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .video-btn:hover {
+            background: rgba(224, 170, 255, 0.9);
+            transform: scale(1.1);
+        }
+        
+        /* Letter Section */
+        .letter-section {
+            padding: 4rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .letter-content {
+            background: rgba(123, 44, 191, 0.3);
+            backdrop-filter: blur(15px);
+            border: 1px solid #9d4edd;
+            border-radius: 20px;
+            padding: 3rem;
+            width: 100%;
+            box-shadow: 0 0 50px rgba(157, 78, 221, 0.7);
+            transform-style: preserve-3d;
+            animation: rotate3d 20s infinite linear, pulseGlow 4s infinite alternate, fadeIn 1.5s ease-out;
+        }
+        
+        @keyframes rotate3d {
+            0% { transform: rotateY(0deg) rotateX(0deg); }
+            25% { transform: rotateY(2deg) rotateX(2deg); }
+            50% { transform: rotateY(0deg) rotateX(3deg); }
+            75% { transform: rotateY(-2deg) rotateX(2deg); }
+            100% { transform: rotateY(0deg) rotateX(0deg); }
+        }
+        
+        @keyframes pulseGlow {
+            0% { box-shadow: 0 0 50px rgba(157, 78, 221, 0.7); }
+            100% { box-shadow: 0 0 70px rgba(224, 170, 255, 0.9); }
+        }
+        
+        .letter-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+        
+        .letter-text.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .letter-signature {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: #e0aaff;
+            text-align: right;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateX(30px);
+            transition: all 0.5s ease 0.3s;
+        }
+        
+        .letter-signature.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+        
+        /* Interactive Elements */
+        .heart {
+            position: absolute;
+            font-size: 2rem;
+            color: #e0aaff;
+            opacity: 0;
+            z-index: 5;
+            animation: heartFloat linear;
+            pointer-events: none;
+            filter: drop-shadow(0 0 5px #9d4edd);
+        }
+        
+        @keyframes heartFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translate(0, -20px) rotate(0deg) scale(1);
+            }
+            90% {
+                opacity: 1;
+            }
+            100% {
+                transform: translate(var(--random-x), calc(var(--random-y) - 100vh)) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+        
+        .sparkle {
+            position: absolute;
+            width: 8px;
+            height: 8px;
+            background: white;
+            border-radius: 50%;
+            filter: blur(1px);
+            opacity: 0;
+            animation: sparklePop 2s forwards;
+            pointer-events: none;
+            z-index: 5;
+        }
+        
+        @keyframes sparklePop {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.5); opacity: 1; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+        
+        /* Music Player */
+        .music-player {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(157, 78, 221, 0.7);
+            border: 1px solid #e0aaff;
+            border-radius: 50px;
+            padding: 0.8rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            z-index: 100;
+            backdrop-filter: blur(5px);
+            box-shadow: 0 0 20px rgba(157, 78, 221, 0.5);
+            max-width: 90%;
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite alternate;
+            opacity: 0;
+            animation: fadeIn 1s forwards 4s;
+        }
+        
+        .music-control {
+            color: #e0aaff;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+        
+        .music-control:hover {
+            transform: scale(1.2);
+            color: white;
+        }
+        
+        .song-title {
+            font-size: 0.9rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 150px;
+            color: #e0aaff;
+        }
+        
+        /* Floating Purple Orbs */
+        .purple-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(30px);
+            opacity: 0.3;
+            z-index: -1;
+            animation: floatOrb 15s infinite linear;
+        }
+        
+        @keyframes floatOrb {
+            0% { transform: translate(0, 0); }
+            25% { transform: translate(50px, 50px); }
+            50% { transform: translate(100px, 0); }
+            75% { transform: translate(50px, -50px); }
+            100% { transform: translate(0, 0); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 768px) {
+            .title {
+                font-size: 2.5rem;
+            }
+            
+            .subtitle {
+                font-size: 1.1rem;
+                padding: 0 1rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+            
+            .gallery {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .gallery-item.video-item {
+                aspect-ratio: 9/16;
+                grid-row: span 1;
+            }
+            
+            .letter-content {
+                padding: 1.5rem;
+            }
+            
+            .letter-text {
+                font-size: 1rem;
+            }
+            
+            .letter-signature {
+                font-size: 1.5rem;
+            }
+            
+            .music-player {
+                top: 15px;
+                right: 15px;
+                padding: 0.5rem 0.8rem;
+                gap: 0.5rem;
+                min-width: auto;
+                width: auto;
+            }
+            
+            .music-control {
+                font-size: 1rem;
+            }
+            
+            .song-title {
+                font-size: 0.7rem;
+                max-width: 80px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .title {
+                font-size: 2rem;
+            }
+            
+            .subtitle {
+                font-size: 1rem;
+            }
+            
+            .music-player {
+                top: 10px;
+                right: 10px;
+                padding: 0.4rem 0.6rem;
+                gap: 0.4rem;
+            }
+            
+            .song-title {
+                max-width: 60px;
+                font-size: 0.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="cosmic-bg" id="cosmicBg"></div>
+    <div class="purple-bg"></div>
+    <div class="particles" id="particles"></div>
+    <audio id="bgMusic" loop>
+        <source src="./media/constellations.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <!-- Floating Orbs -->
+    <div class="purple-orb" style="width: 200px; height: 200px; background: #9d4edd; top: 20%; left: 10%; animation-delay: 0s;"></div>
+    <div class="purple-orb" style="width: 300px; height: 300px; background: #7b2cbf; top: 60%; left: 70%; animation-delay: -5s;"></div>
+    <div class="purple-orb" style="width: 150px; height: 150px; background: #e0aaff; top: 30%; left: 80%; animation-delay: -10s;"></div>
+    
+    <!-- Header Section -->
+    <section class="header">
+        <!-- Music Player -->
+        <div class="music-player" id="musicPlayer">
+            <i class="fas fa-music music-control" id="playBtn"></i>
+            <span class="song-title" id="songTitle">For Purpelly 💜</span>
+        </div>
+        
+        <h1 class="title" id="mainTitle">For My Purpelly💜</h1>
+        <p class="subtitle">Every moment with you is a treasure more precious than all the stars in the sky</p>
+        
+        <div class="scroll-down" id="scrollDown">
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section class="gallery-section" id="gallery">
+        <h2 class="section-title">Your Beautiful Moments</h2>
+        <div class="gallery">
+            <div class="gallery-item">
+                <img src="media/IMG-20250615-WA0249.jpg" alt="Our moment" loading="lazy">
+                <div class="gallery-caption">Shinny Forehead😂💜</div>
+            </div>
+            <div class="gallery-item video-item">
+                <video src="media/VID-20250615-WA0257.mp4" loop playsinline></video>
+                <div class="video-controls">
+                    <button class="video-btn" id="playVideoBtn"><i class="fas fa-play"></i></button>
+                    <button class="video-btn" id="unmuteVideoBtn"><i class="fas fa-volume-mute"></i></button>
+                </div>
+                <div class="gallery-caption">My Fav Edit of You💜</div>
+            </div>
+            <div class="gallery-item">
+                <img src="media/IMG-20250616-WA0105.jpg" alt="Special day" loading="lazy">
+                <div class="gallery-caption">Your Radiant Smile💜</div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Letter Section -->
+    <section class="letter-section" id="letter">
+        <h2 class="section-title">A Poem from me to You</h2>
+        <div class="letter-content">
+            <p class="letter-text" id="line1">My Dearest Blouwatife Elohor Ojo,</p>
+            
+            <p class="letter-text" id="line2">Your beauty shines brighter than all the stars in the sky, and your heart is more precious than the rarest purple gem.</p>
+            
+            <p class="letter-text" id="line3">Every moment with you feels like magic - your laughter lights up my world, and your smile makes every day worthwhile.</p>
+            
+            <p class="letter-text" id="line4">They call you Purpelly, but to me you're my everything - my joy, my inspiration, the beautiful soul that makes life worth living.</p>
+            
+            <p class="letter-text" id="line5">May your days be as vibrant and lovely as your favorite color, and may you always know how deeply you're cherished.</p>
+            
+            <div class="letter-signature" id="signature">
+                <p>With all my love,</p>
+                <p>Raphael Awoyemi💜</p>
+            </div>
+        </div>
+    </section>
+    
+    <script>
+        // DOM Elements
+        const cosmicBg = document.getElementById('cosmicBg');
+        const particlesContainer = document.getElementById('particles');
+        const bgMusic = document.getElementById('bgMusic');
+        const playBtn = document.getElementById('playBtn');
+        const songTitle = document.getElementById('songTitle');
+        const musicPlayer = document.getElementById('musicPlayer');
+        const letterLines = document.querySelectorAll('.letter-text');
+        const signature = document.getElementById('signature');
+        const scrollDown = document.getElementById('scrollDown');
+        const mainTitle = document.getElementById('mainTitle');
+        const subtitle = document.querySelector('.subtitle');
+        const videoItem = document.querySelector('.gallery-item.video-item');
+        const video = videoItem.querySelector('video');
+        const playVideoBtn = document.getElementById('playVideoBtn');
+        const unmuteVideoBtn = document.getElementById('unmuteVideoBtn');
+        
+        // Split title into spans for letter-by-letter animation
+        function splitTextIntoSpans(element) {
+            const text = element.innerText;
+            element.innerHTML = '';
+            
+            text.split('').forEach((char, index) => {
+                const span = document.createElement('span');
+                span.textContent = char === ' ' ? ' ' : char;
+                span.style.setProperty('--char-index', index);
+                element.appendChild(span);
+            });
+        }
+        
+        // Create stars for cosmic background
+        function createStars() {
+            const starCount = 100;
+            
+            for (let i = 0; i < starCount; i++) {
+                const star = document.createElement('div');
+                star.classList.add('star');
+                
+                const size = Math.random() * 3 + 1;
+                const posX = Math.random() * 100;
+                const posY = Math.random() * 100;
+                const duration = Math.random() * 10 + 5;
+                const opacity = Math.random() * 0.8 + 0.2;
+                const delay = Math.random() * 15;
+                
+                star.style.width = `${size}px`;
+                star.style.height = `${size}px`;
+                star.style.left = `${posX}%`;
+                star.style.top = `${posY}%`;
+                star.style.setProperty('--duration', `${duration}s`);
+                star.style.setProperty('--opacity', opacity);
+                star.style.animationDelay = `${delay}s`;
+                
+                cosmicBg.appendChild(star);
+            }
+        }
+        
+        // Create background particles
+        function createParticles() {
+            const particleCount = 80;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.classList.add('particle');
+                
+                const size = Math.random() * 15 + 5;
+                const posX = Math.random() * window.innerWidth;
+                const posY = Math.random() * window.innerHeight;
+                const delay = Math.random() * 5;
+                const duration = Math.random() * 10 + 5;
+                const opacity = Math.random() * 0.6 + 0.2;
+                
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                particle.style.left = `${posX}px`;
+                particle.style.top = `${posY}px`;
+                particle.style.animationDelay = `${delay}s`;
+                particle.style.animationDuration = `${duration}s`;
+                particle.style.opacity = opacity;
+                
+                if (Math.random() > 0.7) {
+                    particle.style.borderRadius = '0';
+                    particle.style.transform = `rotate(${Math.random() * 360}deg)`;
+                }
+                
+                if (Math.random() > 0.5) {
+                    particle.style.background = `rgba(224, 170, 255, ${opacity})`;
+                }
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+        
+        // Create hearts
+        function createHearts(count = 10, x, y) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const heart = document.createElement('div');
+                    heart.classList.add('heart');
+                    heart.innerHTML = '💜';
+                    
+                    const startX = x || Math.random() * window.innerWidth;
+                    const startY = y || window.innerHeight + 100;
+                    const randomX = (Math.random() - 0.5) * 300;
+                    const randomY = -100 - Math.random() * 400;
+                    
+                    heart.style.left = `${startX}px`;
+                    heart.style.top = `${startY}px`;
+                    heart.style.setProperty('--random-x', `${randomX}px`);
+                    heart.style.setProperty('--random-y', `${randomY}px`);
+                    
+                    const duration = 3 + Math.random() * 4;
+                    heart.style.animationDuration = `${duration}s`;
+                    
+                    const size = 0.8 + Math.random() * 1.5;
+                    heart.style.fontSize = `${size}rem`;
+                    
+                    document.body.appendChild(heart);
+                    
+                    setTimeout(() => {
+                        heart.remove();
+                    }, duration * 1000);
+                }, i * 300);
+            }
+        }
+        
+        // Create sparkles
+        function createSparkles(count = 20, x, y) {
+            for (let i = 0; i < count; i++) {
+                setTimeout(() => {
+                    const sparkle = document.createElement('div');
+                    sparkle.classList.add('sparkle');
+                    
+                    const posX = x || Math.random() * window.innerWidth;
+                    const posY = y || Math.random() * window.innerHeight;
+                    
+                    sparkle.style.left = `${posX}px`;
+                    sparkle.style.top = `${posY}px`;
+                    sparkle.style.animationDelay = `${Math.random() * 2}s`;
+                    
+                    if (Math.random() > 0.5) {
+                        sparkle.style.background = '#e0aaff';
+                    }
+                    
+                    document.body.appendChild(sparkle);
+                    
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 2000);
+                }, i * 100);
+            }
+        }
+        
+        // Animate letter lines on scroll
+        function animateOnScroll() {
+            const letterSection = document.querySelector('.letter-section');
+            const sectionPosition = letterSection.getBoundingClientRect().top;
+            const screenPosition = window.innerHeight / 1.3;
+            
+            if (sectionPosition < screenPosition) {
+                letterLines.forEach((line, index) => {
+                    setTimeout(() => {
+                        line.classList.add('show');
+                    }, index * 400);
+                });
+                
+                setTimeout(() => {
+                    signature.classList.add('show');
+                }, letterLines.length * 400);
+                
+                window.removeEventListener('scroll', animateOnScroll);
+            }
+        }
+        
+        // Music control
+        function toggleMusic() {
+            if (bgMusic.paused) {
+                bgMusic.play()
+                    .then(() => {
+                        playBtn.classList.remove('fa-music');
+                        playBtn.classList.add('fa-pause');
+                        musicPlayer.style.background = 'rgba(157, 78, 221, 0.8)';
+                    })
+                    .catch(error => {
+                        console.log("Playback failed:", error);
+                    });
+            } else {
+                bgMusic.pause();
+                playBtn.classList.remove('fa-pause');
+                playBtn.classList.add('fa-music');
+                musicPlayer.style.background = 'rgba(157, 78, 221, 0.7)';
+            }
+        }
+        
+        // Video controls
+        function toggleVideoPlayback() {
+            if (video.paused) {
+                video.play();
+                playVideoBtn.innerHTML = '<i class="fas fa-pause"></i>';
+                // Pause background music when video plays
+                if (!bgMusic.paused) {
+                    bgMusic.pause();
+                    playBtn.classList.remove('fa-pause');
+                    playBtn.classList.add('fa-music');
+                    musicPlayer.style.background = 'rgba(157, 78, 221, 0.7)';
+                }
+            } else {
+                video.pause();
+                playVideoBtn.innerHTML = '<i class="fas fa-play"></i>';
+            }
+        }
+        
+        function toggleVideoMute() {
+            video.muted = !video.muted;
+            unmuteVideoBtn.innerHTML = video.muted ? 
+                '<i class="fas fa-volume-mute"></i>' : 
+                '<i class="fas fa-volume-up"></i>';
+        }
+        
+        // Smooth scroll to section
+        function scrollToSection(sectionId) {
+            document.getElementById(sectionId).scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+        
+        // Try to autoplay music
+        function tryAutoplay() {
+            bgMusic.volume = 0.3;
+            const playPromise = bgMusic.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.then(() => {
+                    // Autoplay worked
+                    playBtn.classList.remove('fa-music');
+                    playBtn.classList.add('fa-pause');
+                    musicPlayer.style.background = 'rgba(157, 78, 221, 0.8)';
+                })
+                .catch(error => {
+                    // Autoplay was prevented
+                    console.log("Autoplay prevented:", error);
+                    songTitle.textContent = "Tap to play";
+                });
+            }
+        }
+        
+        // Event listeners
+        playBtn.addEventListener('click', toggleMusic);
+        musicPlayer.addEventListener('click', function(e) {
+            if (e.target !== playBtn) {
+                toggleMusic();
+            }
+        });
+        
+        playVideoBtn.addEventListener('click', toggleVideoPlayback);
+        unmuteVideoBtn.addEventListener('click', toggleVideoMute);
+        
+        scrollDown.addEventListener('click', () => scrollToSection('gallery'));
+        
+        // Initialize
+        splitTextIntoSpans(mainTitle);
+        createStars();
+        createParticles();
+        
+        // Start animations
+        setInterval(() => createHearts(), 5000);
+        setInterval(() => createSparkles(), 3000);
+        
+        // Animate letter on scroll
+        window.addEventListener('scroll', animateOnScroll);
+        
+        // Try to autoplay music immediately
+        tryAutoplay();
+        
+        // Update song title for mobile if needed
+        if (window.innerWidth <= 768) {
+            songTitle.textContent = "💜 Purpelly";
+        }
+        
+        // Show elements with delays
+        setTimeout(() => {
+            subtitle.style.animation = 'fadeInUp 1s ease-out forwards';
+            scrollDown.style.opacity = '1';
+            musicPlayer.style.opacity = '1';
+        }, 3500);
+    </script>
+</body>
+</html>
