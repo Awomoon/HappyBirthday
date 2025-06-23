@@ -5,23 +5,758 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For My Purpelly 💜</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="style.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;700&family=Montserrat:wght@300;400;600;700;900&family=Great+Vibes&display=swap');
+
+        :root {
+            --primary-purple: #9d4edd;
+            --light-purple: #e0aaff;
+            --deep-purple: #7b2cbf;
+            --ultra-purple: #5a189a;
+            --dark-bg: #0a0a1a;
+            --glass-bg: rgba(123, 44, 191, 0.1);
+            --glass-border: rgba(157, 78, 221, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            overflow-x: hidden;
+            background: var(--dark-bg);
+            font-family: 'Montserrat', sans-serif;
+            color: white;
+            min-height: 100vh;
+            scroll-behavior: smooth;
+            cursor: none;
+        }
+
+        /* Custom Cursor */
+        .cursor {
+            position: fixed;
+            width: 20px;
+            height: 20px;
+            border: 2px solid var(--light-purple);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9999;
+            transition: all 0.1s ease;
+            mix-blend-mode: difference;
+        }
+
+        .cursor-trail {
+            position: fixed;
+            width: 6px;
+            height: 6px;
+            background: var(--primary-purple);
+            border-radius: 50%;
+            pointer-events: none;
+            z-index: 9998;
+            opacity: 0.8;
+        }
+
+        /* Enhanced Cosmic Background */
+        .cosmic-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background:
+                radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(255, 119, 198, 0.3) 0%, transparent 50%),
+                radial-gradient(circle at 40% 40%, rgba(120, 119, 198, 0.2) 0%, transparent 50%),
+                linear-gradient(135deg, #0a0a1a 0%, #1a0a2e 50%, #16213e 100%);
+            z-index: -3;
+            animation: cosmicShift 40s infinite alternate;
+        }
+
+        @keyframes cosmicShift {
+            0% { filter: hue-rotate(0deg) brightness(0.8); }
+            33% { filter: hue-rotate(30deg) brightness(1); }
+            66% { filter: hue-rotate(-30deg) brightness(0.9); }
+            100% { filter: hue-rotate(0deg) brightness(1.1); }
+        }
+
+        /* Enhanced Stars */
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            animation: twinkle var(--duration) infinite ease-in-out;
+            opacity: 0;
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+        }
+
+        @keyframes twinkle {
+            0%, 100% {
+                opacity: 0;
+                transform: scale(0.5) rotate(0deg);
+                box-shadow: 0 0 6px rgba(255, 255, 255, 0.8);
+            }
+            50% {
+                opacity: var(--opacity);
+                transform: scale(1.2) rotate(180deg);
+                box-shadow: 0 0 15px rgba(224, 170, 255, 1);
+            }
+        }
+
+        /* Enhanced Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            background: var(--light-purple);
+            border-radius: 50%;
+            filter: blur(2px);
+            animation: float 12s infinite ease-in-out;
+            box-shadow: 0 0 20px rgba(224, 170, 255, 0.5);
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg) scale(1);
+                box-shadow: 0 0 20px rgba(224, 170, 255, 0.5);
+            }
+            25% {
+                transform: translateY(-30px) rotate(90deg) scale(1.2);
+                box-shadow: 0 0 30px rgba(157, 78, 221, 0.8);
+            }
+            50% {
+                transform: translateY(-60px) rotate(180deg) scale(0.8);
+                box-shadow: 0 0 25px rgba(224, 170, 255, 0.6);
+            }
+            75% {
+                transform: translateY(-30px) rotate(270deg) scale(1.1);
+                box-shadow: 0 0 35px rgba(157, 78, 221, 0.7);
+            }
+        }
+
+        /* Enhanced Header */
+        .header {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .title {
+            font-family: 'Great Vibes', cursive;
+            font-size: 5rem;
+            color: var(--light-purple);
+            margin-bottom: 2rem;
+            text-shadow:
+                0 0 20px var(--primary-purple),
+                0 0 40px var(--primary-purple),
+                0 0 60px var(--primary-purple);
+            z-index: 10;
+            position: relative;
+            animation: titleGlow 4s infinite alternate;
+        }
+
+        @keyframes titleGlow {
+            0% {
+                text-shadow:
+                    0 0 20px var(--primary-purple),
+                    0 0 40px var(--primary-purple),
+                    0 0 60px var(--primary-purple);
+                transform: scale(1);
+            }
+            100% {
+                text-shadow:
+                    0 0 30px var(--light-purple),
+                    0 0 60px var(--light-purple),
+                    0 0 90px var(--light-purple);
+                transform: scale(1.02);
+            }
+        }
+
+        .title span {
+            opacity: 0;
+            animation: letterReveal 0.8s forwards;
+            animation-delay: calc(var(--char-index) * 0.15s + 0.5s);
+            display: inline-block;
+        }
+
+        @keyframes letterReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(20px) rotateX(90deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) rotateX(0deg);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.6rem;
+            margin-bottom: 3rem;
+            max-width: 900px;
+            z-index: 10;
+            font-weight: 300;
+            line-height: 1.8;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: subtitleReveal 1.2s ease-out forwards;
+            animation-delay: 4s;
+            background: linear-gradient(45deg, #e0aaff, #c77dff, #e0aaff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        @keyframes subtitleReveal {
+            0% {
+                opacity: 0;
+                transform: translateY(30px);
+                filter: blur(10px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+                filter: blur(0px);
+            }
+        }
+
+        /* Enhanced Scroll Indicator */
+        .scroll-down {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            color: var(--light-purple);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 10;
+            opacity: 0;
+            animation: scrollPulse 2s infinite, fadeIn 1s forwards;
+            animation-delay: 5s;
+            padding: 15px;
+            border: 2px solid var(--glass-border);
+            border-radius: 50%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .scroll-down:hover {
+            transform: translateX(-50%) scale(1.1);
+            background: rgba(224, 170, 255, 0.2);
+            box-shadow: 0 0 30px rgba(224, 170, 255, 0.5);
+        }
+
+        @keyframes scrollPulse {
+            0%, 100% {
+                transform: translateY(0) translateX(-50%);
+                box-shadow: 0 0 20px rgba(224, 170, 255, 0.3);
+            }
+            50% {
+                transform: translateY(-10px) translateX(-50%);
+                box-shadow: 0 0 40px rgba(224, 170, 255, 0.6);
+            }
+        }
+
+        /* Enhanced Gallery */
+        .gallery-section {
+            padding: 6rem 2rem;
+            position: relative;
+        }
+
+        .section-title {
+            font-family: 'Dancing Script', cursive;
+            font-size: 3.5rem;
+            color: var(--light-purple);
+            text-align: center;
+            margin-bottom: 4rem;
+            animation: titleBreathe 6s infinite alternate;
+            text-shadow: 0 0 20px rgba(224, 170, 255, 0.8);
+        }
+
+        @keyframes titleBreathe {
+            0% {
+                transform: scale(1);
+                text-shadow: 0 0 20px rgba(224, 170, 255, 0.8);
+            }
+            100% {
+                transform: scale(1.03);
+                text-shadow: 0 0 30px rgba(224, 170, 255, 1);
+            }
+        }
+
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .gallery-item {
+            position: relative;
+            border-radius: 25px;
+            overflow: hidden;
+            box-shadow:
+                0 20px 40px rgba(157, 78, 221, 0.3),
+                0 0 0 1px rgba(224, 170, 255, 0.2);
+            transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            aspect-ratio: 1/1;
+            animation: galleryFloat 1.2s ease-out;
+            animation-fill-mode: both;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+        }
+
+        .gallery-item.video-item {
+            aspect-ratio: 9/16;
+            grid-row: span 2;
+        }
+
+        .gallery-item:nth-child(odd) { animation-delay: 0.3s; }
+        .gallery-item:nth-child(even) { animation-delay: 0.6s; }
+
+        @keyframes galleryFloat {
+            0% {
+                opacity: 0;
+                transform: translateY(60px) scale(0.8) rotateX(30deg);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1) rotateX(0deg);
+            }
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-15px) scale(1.02) rotateY(5deg);
+            box-shadow:
+                0 30px 60px rgba(224, 170, 255, 0.4),
+                0 0 50px rgba(157, 78, 221, 0.6),
+                0 0 0 1px rgba(224, 170, 255, 0.4);
+        }
+
+        .gallery-item img,
+        .gallery-item video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: all 0.6s ease;
+            filter: brightness(0.9) contrast(1.1);
+        }
+
+        .gallery-item:hover img,
+        .gallery-item:hover video {
+            transform: scale(1.05);
+            filter: brightness(1) contrast(1.2);
+        }
+
+        .gallery-caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(transparent, rgba(10, 10, 26, 0.95));
+            padding: 2rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.6rem;
+            transform: translateY(100%);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            color: var(--light-purple);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .gallery-item:hover .gallery-caption {
+            transform: translateY(0);
+        }
+
+        /* Enhanced Video Controls */
+        .video-controls {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: flex;
+            gap: 15px;
+            z-index: 10;
+            opacity: 0;
+            transition: all 0.4s ease;
+        }
+
+        .gallery-item:hover .video-controls {
+            opacity: 1;
+        }
+
+        .video-btn {
+            background: rgba(157, 78, 221, 0.8);
+            border: 2px solid rgba(224, 170, 255, 0.5);
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            backdrop-filter: blur(10px);
+            font-size: 1.2rem;
+        }
+
+        .video-btn:hover {
+            background: rgba(224, 170, 255, 0.9);
+            transform: scale(1.15);
+            box-shadow: 0 10px 25px rgba(224, 170, 255, 0.4);
+        }
+
+        /* Enhanced Letter Section */
+        .letter-section {
+            padding: 6rem 2rem;
+            max-width: 900px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .letter-content {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: 2px solid var(--glass-border);
+            border-radius: 30px;
+            padding: 4rem;
+            width: 100%;
+            box-shadow:
+                0 30px 60px rgba(157, 78, 221, 0.3),
+                inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            animation: letterFloat 8s infinite ease-in-out, letterGlow 6s infinite alternate;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .letter-content::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: conic-gradient(transparent, rgba(224, 170, 255, 0.1), transparent);
+            animation: rotate 20s linear infinite;
+            z-index: -1;
+        }
+
+        @keyframes letterFloat {
+            0%, 100% { transform: translateY(0) rotateX(0deg); }
+            50% { transform: translateY(-10px) rotateX(2deg); }
+        }
+
+        @keyframes letterGlow {
+            0% {
+                box-shadow:
+                    0 30px 60px rgba(157, 78, 221, 0.3),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            }
+            100% {
+                box-shadow:
+                    0 40px 80px rgba(224, 170, 255, 0.4),
+                    inset 0 1px 0 rgba(255, 255, 255, 0.2);
+            }
+        }
+
+        @keyframes rotate {
+            100% { transform: rotate(360deg); }
+        }
+
+        .letter-text {
+            font-size: 1.2rem;
+            line-height: 2;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+            font-weight: 300;
+        }
+
+        .letter-text.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .letter-signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5rem;
+            color: var(--light-purple);
+            text-align: right;
+            margin-top: 3rem;
+            opacity: 0;
+            transform: translateX(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.5s;
+            text-shadow: 0 0 20px rgba(224, 170, 255, 0.6);
+        }
+
+        .letter-signature.show {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        /* Enhanced Interactive Elements */
+        .heart {
+            position: absolute;
+            font-size: 2.5rem;
+            color: var(--light-purple);
+            opacity: 0;
+            z-index: 5;
+            animation: heartFloat linear;
+            pointer-events: none;
+            filter: drop-shadow(0 0 10px var(--primary-purple));
+        }
+
+        @keyframes heartFloat {
+            0% {
+                transform: translate(0, 0) rotate(0deg) scale(0);
+                opacity: 0;
+            }
+            10% {
+                opacity: 1;
+                transform: translate(0, -30px) rotate(45deg) scale(1);
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                transform: translate(var(--random-x), calc(var(--random-y) - 100vh)) rotate(360deg) scale(0);
+                opacity: 0;
+            }
+        }
+
+        .sparkle {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: radial-gradient(circle, white, var(--light-purple));
+            border-radius: 50%;
+            opacity: 0;
+            animation: sparklePop 3s forwards;
+            pointer-events: none;
+            z-index: 5;
+            box-shadow: 0 0 20px rgba(224, 170, 255, 0.8);
+        }
+
+        @keyframes sparklePop {
+            0% {
+                transform: scale(0) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: scale(2) rotate(180deg);
+                opacity: 1;
+                box-shadow: 0 0 30px rgba(224, 170, 255, 1);
+            }
+            100% {
+                transform: scale(0) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        /* Enhanced Music Player */
+        .music-player {
+            position: fixed;
+            top: 30px;
+            right: 30px;
+            background: var(--glass-bg);
+            border: 2px solid var(--glass-border);
+            border-radius: 60px;
+            padding: 1rem 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 100;
+            backdrop-filter: blur(15px);
+            box-shadow: 0 10px 30px rgba(157, 78, 221, 0.3);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
+            animation: fadeIn 1s forwards;
+            animation-delay: 5s;
+        }
+
+        .music-player:hover {
+            transform: scale(1.05);
+            box-shadow: 0 20px 50px rgba(224, 170, 255, 0.4);
+            background: rgba(157, 78, 221, 0.2);
+        }
+
+        .music-control {
+            color: var(--light-purple);
+            font-size: 1.4rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            flex-shrink: 0;
+        }
+
+        .music-control:hover {
+            transform: scale(1.3) rotate(15deg);
+            color: white;
+            text-shadow: 0 0 15px var(--light-purple);
+        }
+
+        .song-title {
+            font-size: 1rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 180px;
+            color: var(--light-purple);
+            font-weight: 400;
+        }
+
+        /* Enhanced Floating Orbs */
+        .purple-orb {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(40px);
+            opacity: 0.4;
+            z-index: -1;
+            animation: floatOrb 20s infinite ease-in-out;
+        }
+
+        @keyframes floatOrb {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(100px, 50px) scale(1.2); }
+            50% { transform: translate(200px, -50px) scale(0.8); }
+            75% { transform: translate(50px, -100px) scale(1.1); }
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--dark-bg);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            opacity: 1;
+            transition: opacity 1s ease;
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .loading-heart {
+            font-size: 4rem;
+            color: var(--light-purple);
+            animation: loadingPulse 1.5s infinite ease-in-out;
+        }
+
+        @keyframes loadingPulse {
+            0%, 100% {
+                transform: scale(1);
+                filter: drop-shadow(0 0 20px var(--primary-purple));
+            }
+            50% {
+                transform: scale(1.3);
+                filter: drop-shadow(0 0 40px var(--light-purple));
+            }
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 3rem 2rem;
+            font-family: 'Dancing Script', cursive;
+            font-size: 1.8rem;
+            color: var(--light-purple);
+            position: relative;
+            background: linear-gradient(transparent, rgba(10, 10, 26, 0.8));
+            margin-top: 4rem;
+        }
+
+        .footer-heart {
+            color: #ff6b6b;
+            animation: heartbeat 1.5s infinite;
+            display: inline-block;
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            25% { transform: scale(1.2); }
+            50% { transform: scale(0.9); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .title { font-size: 3rem; }
+            .subtitle { font-size: 1.2rem; padding: 0 1rem; }
+            .section-title { font-size: 2.5rem; }
+            .gallery { grid-template-columns: 1fr; gap: 2rem; }
+            .gallery-item.video-item { aspect-ratio: 9/16; grid-row: span 1; }
+            .letter-content { padding: 2rem; }
+            .letter-text { font-size: 1rem; }
+            .letter-signature { font-size: 2rem; }
+            .music-player {
+                top: 20px;
+                right: 20px;
+                padding: 0.8rem 1rem;
+                gap: 0.8rem;
+            }
+            .music-control { font-size: 1.2rem; }
+            .song-title { font-size: 0.9rem; max-width: 120px; }
+        }
+
+        @media (max-width: 480px) {
+            .title { font-size: 2.5rem; }
+            .subtitle { font-size: 1rem; }
+            .music-player {
+                top: 15px;
+                right: 15px;
+                padding: 0.6rem 0.8rem;
+            }
+            .song-title { max-width: 80px; font-size: 0.8rem; }
+        }
+    </style>
 </head>
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-heart">💜</div>
+    </div>
+
+    <!-- Custom Cursor -->
+    <div class="cursor" id="cursor"></div>
+
     <!-- Background Elements -->
     <div class="cosmic-bg" id="cosmicBg"></div>
-    <div class="purple-bg"></div>
     <div class="particles" id="particles"></div>
+
+    <!-- Demo Audio (since we can't use external files) -->
     <audio id="bgMusic" loop>
-        <source src="./media/constellations.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
+        <source src="data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaAjiR1/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaBCSR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaBCSR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaBCSR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaADiR1/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaADiR1/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaADiR1/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaADiR1/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAaADiR1/LNeSsFJHfH8N2QQAoUXrTp66hVFApGn+DyvmAa" type="audio/wav">
     </audio>
-    
+
     <!-- Floating Orbs -->
-    <div class="purple-orb" style="width: 200px; height: 200px; background: #9d4edd; top: 20%; left: 10%; animation-delay: 0s;"></div>
-    <div class="purple-orb" style="width: 300px; height: 300px; background: #7b2cbf; top: 60%; left: 70%; animation-delay: -5s;"></div>
-    <div class="purple-orb" style="width: 150px; height: 150px; background: #e0aaff; top: 30%; left: 80%; animation-delay: -10s;"></div>
-    
+    <div class="purple-orb" style="width: 300px; height: 300px; background: var(--primary-purple); top: 15%; left: 5%; animation-delay: 0s;"></div>
+    <div class="purple-orb" style="width: 400px; height: 400px; background: var(--deep-purple); top: 60%; left: 70%; animation-delay: -8s;"></div>
+    <div class="purple-orb" style="width: 200px; height: 200px; background: var(--light-purple); top: 25%; left: 80%; animation-delay: -15s;"></div>
+
     <!-- Header Section -->
     <section class="header">
         <!-- Music Player -->
@@ -29,59 +764,209 @@
             <i class="fas fa-music music-control" id="playBtn"></i>
             <span class="song-title" id="songTitle">For Purpelly 💜</span>
         </div>
-        
+
         <h1 class="title" id="mainTitle">For My Purpelly💜</h1>
         <p class="subtitle">Every moment with you is a treasure more precious than all the stars in the sky</p>
-        
+
         <div class="scroll-down" id="scrollDown">
             <i class="fas fa-chevron-down"></i>
         </div>
     </section>
-    
+
     <!-- Gallery Section -->
     <section class="gallery-section" id="gallery">
         <h2 class="section-title">Your Beautiful Moments</h2>
         <div class="gallery">
             <div class="gallery-item">
-                <img src="media/IMG-20250615-WA0249.jpg" alt="Our moment" loading="lazy">
+                <div style="width: 100%; height: 100%; background: linear-gradient(45deg, #9d4edd, #e0aaff); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+                    <img src="./media/IMG-20250615-WA0249.jpg" alt="">
+                </div>
                 <div class="gallery-caption">Shinny Forehead😂💜</div>
             </div>
             <div class="gallery-item video-item">
-                <video src="media/VID-20250615-WA0257.mp4" loop playsinline></video>
-                <div class="video-controls">
-                    <button class="video-btn" id="playVideoBtn"><i class="fas fa-play"></i></button>
-                    <button class="video-btn" id="unmuteVideoBtn"><i class="fas fa-volume-mute"></i></button>
+                <div style="width: 100%; height: 100%; background: linear-gradient(135deg, #7b2cbf, #c77dff); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+                   <video src="./media/constellations.mp3"></video>
                 </div>
-                <div class="gallery-caption">My Fav Edit of You💜</div>
+                <div class="gallery-caption">Our Special Moment</div>
+                <div class="video-controls">
+                    <div class="video-btn"><i class="fas fa-play"></i></div>
+                    <div class="video-btn"><i class="fas fa-volume-up"></i></div>
+                </div>
             </div>
             <div class="gallery-item">
-                <img src="media/IMG-20250616-WA0105.jpg" alt="Special day" loading="lazy">
-                <div class="gallery-caption">Your Radiant Smile💜</div>
+                <div style="width: 100%; height: 100%; background: linear-gradient(225deg, #5a189a, #e0aaff); display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+                    <img src="./media/IMG-20250616-WA0105.jpg" alt="">
+                </div>
+                <div class="gallery-caption">That Beautiful Smile</div>
             </div>
         </div>
     </section>
-    
-    <!-- Letter Section -->
-    <section class="letter-section" id="letter">
-        <h2 class="section-title">A Poem from me to You</h2>
+
+    <!-- Love Letter Section -->
+    <section class="letter-section">
+        <h2 class="section-title">My Heart's Message</h2>
         <div class="letter-content">
-            <p class="letter-text" id="line1">My Dearest Blouwatife Elohor Ojo,</p>
-            
-            <p class="letter-text" id="line2">Your beauty shines brighter than all the stars in the sky, and your heart is more precious than the rarest purple gem.</p>
-            
-            <p class="letter-text" id="line3">Every moment with you feels like magic - your laughter lights up my world, and your smile makes every day worthwhile.</p>
-            
-            <p class="letter-text" id="line4">They call you Purpelly, but to me you're my everything - my joy, my inspiration, the beautiful soul that makes life worth living.</p>
-            
-            <p class="letter-text" id="line5">May your days be as vibrant and lovely as your favorite color, and may you always know how deeply you're cherished.</p>
-            
-            <div class="letter-signature" id="signature">
-                <p>With all my love,</p>
-                <p>Raphael Awoyemi💜</p>
-            </div>
+            <p class="letter-text show">My Dearest Purpelly,</p>
+            <p class="letter-text show">From the moment our paths crossed, my world has been painted in the most beautiful shades of purple - the color of royalty, magic, and our love.</p>
+            <p class="letter-text show">Your laughter is my favorite melody, your smile my brightest light. Each day with you is a gift I treasure more than words can express.</p>
+            <p class="letter-text show">I promise to be your shelter in storms, your partner in adventures, and your biggest fan in all you do. My heart found its home in yours, and there it will stay.</p>
+            <p class="letter-text show">Forever yours,</p>
+            <p class="letter-signature show">[Your Name]</p>
         </div>
     </section>
-    
-    <script src="script.js"></script>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <p>Made with <span class="footer-heart">❤️</span> for you, my Purpelly</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Loading screen
+            setTimeout(() => {
+                document.getElementById('loadingScreen').classList.add('hidden');
+            }, 3000);
+
+            // Custom cursor
+            const cursor = document.getElementById('cursor');
+            const cursorTrail = document.createElement('div');
+            cursorTrail.className = 'cursor-trail';
+            document.body.appendChild(cursorTrail);
+
+            let mouseX = 0, mouseY = 0;
+            let trailX = 0, trailY = 0;
+            let delay = 0;
+
+            document.addEventListener('mousemove', (e) => {
+                mouseX = e.clientX;
+                mouseY = e.clientY;
+                cursor.style.left = (mouseX - 10) + 'px';
+                cursor.style.top = (mouseY - 10) + 'px';
+            });
+
+            function animateCursorTrail() {
+                let distX = mouseX - trailX;
+                let distY = mouseY - trailY;
+
+                trailX += distX / 10;
+                trailY += distY / 10;
+
+                cursorTrail.style.left = (trailX - 3) + 'px';
+                cursorTrail.style.top = (trailY - 3) + 'px';
+
+                requestAnimationFrame(animateCursorTrail);
+            }
+            animateCursorTrail();
+
+            // Scroll down button
+            document.getElementById('scrollDown').addEventListener('click', () => {
+                window.scrollTo({
+                    top: document.getElementById('gallery').offsetTop,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Music player
+            const bgMusic = document.getElementById('bgMusic');
+            const playBtn = document.getElementById('playBtn');
+
+            playBtn.addEventListener('click', () => {
+                if (bgMusic.paused) {
+                    bgMusic.play();
+                    playBtn.classList.remove('fa-music');
+                    playBtn.classList.add('fa-pause');
+                } else {
+                    bgMusic.pause();
+                    playBtn.classList.remove('fa-pause');
+                    playBtn.classList.add('fa-music');
+                }
+            });
+
+            // Create stars
+            function createStars() {
+                const cosmicBg = document.getElementById('cosmicBg');
+                for (let i = 0; i < 200; i++) {
+                    const star = document.createElement('div');
+                    star.className = 'star';
+                    star.style.left = Math.random() * 100 + '%';
+                    star.style.top = Math.random() * 100 + '%';
+                    star.style.width = (Math.random() * 3 + 1) + 'px';
+                    star.style.height = star.style.width;
+                    star.style.setProperty('--duration', (Math.random() * 5 + 3) + 's');
+                    star.style.setProperty('--opacity', Math.random() * 0.8 + 0.2);
+                    cosmicBg.appendChild(star);
+                }
+            }
+            createStars();
+
+            // Create particles
+            function createParticles() {
+                const particlesContainer = document.getElementById('particles');
+                for (let i = 0; i < 30; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'particle';
+                    particle.style.left = Math.random() * 100 + '%';
+                    particle.style.top = Math.random() * 100 + '%';
+                    particle.style.width = (Math.random() * 15 + 5) + 'px';
+                    particle.style.height = particle.style.width;
+                    particle.style.animationDelay = (Math.random() * 12) + 's';
+                    particlesContainer.appendChild(particle);
+                }
+            }
+            createParticles();
+
+            // Heart click effect
+            document.addEventListener('click', (e) => {
+                createHeart(e.clientX, e.clientY);
+                createSparkle(e.clientX, e.clientY);
+            });
+
+            function createHeart(x, y) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                heart.innerHTML = '💜';
+                heart.style.left = x + 'px';
+                heart.style.top = y + 'px';
+                heart.style.setProperty('--random-x', (Math.random() * 400 - 200) + 'px');
+                heart.style.setProperty('--random-y', (Math.random() * 400 - 200) + 'px');
+                document.body.appendChild(heart);
+
+                setTimeout(() => {
+                    heart.remove();
+                }, 3000);
+            }
+
+            function createSparkle(x, y) {
+                for (let i = 0; i < 5; i++) {
+                    const sparkle = document.createElement('div');
+                    sparkle.className = 'sparkle';
+                    sparkle.style.left = (x + Math.random() * 40 - 20) + 'px';
+                    sparkle.style.top = (y + Math.random() * 40 - 20) + 'px';
+                    document.body.appendChild(sparkle);
+
+                    setTimeout(() => {
+                        sparkle.remove();
+                    }, 3000);
+                }
+            }
+
+            // Animate letter text on scroll
+            const letterTexts = document.querySelectorAll('.letter-text');
+            const letterSignature = document.querySelector('.letter-signature');
+
+            function checkScroll() {
+                const triggerBottom = window.innerHeight / 5 * 4;
+                const letterTop = document.querySelector('.letter-content').getBoundingClientRect().top;
+
+                if (letterTop < triggerBottom) {
+                    letterTexts.forEach(text => text.classList.add('show'));
+                    letterSignature.classList.add('show');
+                }
+            }
+
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // Check on load
+        });
+    </script>
 </body>
 </html>
